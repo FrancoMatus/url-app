@@ -14,9 +14,14 @@ router.get('/:_id', async (req, res) => {
 })
 
 router.post('/shorten', async (req, res) => {
+
     const newUrl = new Url(req.body);
-    await newUrl.save();
-    res.json(newUrl)
+    const test = Url.findOne({ link: newUrl.link })
+    if(!test){
+        await newUrl.save();
+        res.json(newUrl)
+    }
+    res.json([10])
 });
 
 
