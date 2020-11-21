@@ -1,11 +1,13 @@
 import {
     GET_ALL_URLS, 
     CREATE_URL,
-    GET_UNIQUE_URL
+    GET_UNIQUE_URL,
+    REPEAT_URL
 } from '../Constants';
 const initialState = {
    allUrl: [],
-   uniqueUrl: {}
+   uniqueUrl: {},
+   repeatUrl: false
 }
 
 export default function urlReducer(state = initialState, action){
@@ -24,6 +26,11 @@ export default function urlReducer(state = initialState, action){
             return {
                 ...state,
                 uniqueUrl: action.payload
+            }
+        case REPEAT_URL:
+            return {
+                ...state,
+                repeatUrl: true
             }
             default:
                 return state;

@@ -14,14 +14,19 @@ router.get('/:_id', async (req, res) => {
 })
 
 router.post('/shorten', async (req, res) => {
+    let { link } = req.body;
+    let newLink = link.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '')
+    let shortUrl = {...req.body, link: newLink };
 
-    const newUrl = new Url(req.body);
-    const test = Url.findOne({ link: newUrl.link })
+    const newUrl = new Url(shortUrl);
+    const test = await Url.findOne({ link: newLink });
     if(!test){
         await newUrl.save();
+        res.status(201)
         res.json(newUrl)
     }
-    res.json([10])
+    res.status(208)
+    res.json(["existe"])
 });
 
 

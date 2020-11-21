@@ -8,7 +8,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import NavBar from './NavBar/NavBar';
+import Alert from '@material-ui/lab/Alert';
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +25,8 @@ const CreateUrl = () => {
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
     const allUrlToShow = useSelector( state => state.allUrl.allUrl)
+    const validation = useSelector( state => state.allUrl.repeatUrl)
+
 const onSubmit = data => {
     dispatch(addUrl(data))
 }
@@ -37,6 +41,16 @@ return (
     <div className='container'>
         <div className="form">
       <h2>New URL</h2>
+      { 
+      validation ? 
+      <Alert severity="error"> ERROR! La URL ya ha sido abreviada. 
+      Vea todas las URLs acortadas haciendo <Link to="/home"> Click aquí</Link>
+      </Alert> 
+      :
+      <div>
+        <h5>Bienvenido al acortador </h5>
+      </div>
+      }
       <div class="col-md-12">
         <form
           onSubmit={handleSubmit(onSubmit)}

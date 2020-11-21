@@ -2,7 +2,8 @@ import axios from 'axios';
 import {
     GET_ALL_URLS, 
     CREATE_URL,
-    GET_UNIQUE_URL
+    GET_UNIQUE_URL,
+    REPEAT_URL
 } from '../Constants';
 
 export const getAllUrl = () => {
@@ -16,7 +17,13 @@ export const getAllUrl = () => {
 export const addUrl = (data) => {
     return function(dispatch){
         return axios.post('http://localhost:3001/shorten', data)
-        .then( res => dispatch({ type: CREATE_URL, payload: res.data }))
+        .then( res => {
+            if(res.data[0] === "existe"){
+                dispatch({ type: REPEAT_URL, payload: res.data })
+            } else {
+                dispatch({ type: CREATE_URL, payload: res.data })
+            }
+        })
         .catch( err => console.log( err ));
     }
 }

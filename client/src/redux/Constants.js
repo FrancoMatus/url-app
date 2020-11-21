@@ -2,6 +2,6 @@
 export const GET_ALL_URLS = "GET_ALL_URLS";
 export const CREATE_URL = "CREATE_URL";
 export const GET_UNIQUE_URL = "GET_UNIQUE_URL";
-
+export const REPEAT_URL = "REPEAT_URL";
 // GET_ALL_URLS, CREATE_URL, DELETE_URL, GET_UNIQUE_URL
 

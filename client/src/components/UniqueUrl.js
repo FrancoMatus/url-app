@@ -9,7 +9,7 @@ const UniqueUrl = ({_id}) => {
 
 useEffect(() => {
     dispatch(getUrlById(_id))
-}, [])
+}, {})
 
 return (
     <div>
